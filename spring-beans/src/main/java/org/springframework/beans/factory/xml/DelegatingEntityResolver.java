@@ -29,6 +29,9 @@ import org.springframework.util.Assert;
  * {@link EntityResolver} implementation that delegates to a {@link BeansDtdResolver}
  * and a {@link PluggableSchemaResolver} for DTDs and XML schemas, respectively.
  *
+ *
+ * DelegatingEntityResolver 为 EntityResolver默认实现
+ *
  * @author Rob Harrop
  * @author Juergen Hoeller
  * @author Rick Evans
@@ -57,10 +60,18 @@ public class DelegatingEntityResolver implements EntityResolver {
 	 * {@link ClassLoader}.
 	 * @param classLoader the ClassLoader to use for loading
 	 * (can be {@code null}) to use the default ClassLoader)
+	 *
+	 *   对于不同的
+	 *
 	 */
 	public DelegatingEntityResolver(@Nullable ClassLoader classLoader) {
+
+		//DTD：BeansDtdResolver 直接截取systemId最后的xx.dtd，然后去当前路径找
 		this.dtdResolver = new BeansDtdResolver();
+
+		//XSD：PluggableSchemaResolver 默认去META-INF/spring.schemas解析
 		this.schemaResolver = new PluggableSchemaResolver(classLoader);
+
 	}
 
 	/**
@@ -83,10 +94,15 @@ public class DelegatingEntityResolver implements EntityResolver {
 			throws SAXException, IOException {
 
 		if (systemId != null) {
+
+			//如果是dtd从这里解析
 			if (systemId.endsWith(DTD_SUFFIX)) {
 				return this.dtdResolver.resolveEntity(publicId, systemId);
 			}
+
 			else if (systemId.endsWith(XSD_SUFFIX)) {
+
+				//通过调用META-INF/spring.schemas解析
 				return this.schemaResolver.resolveEntity(publicId, systemId);
 			}
 		}

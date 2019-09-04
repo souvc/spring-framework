@@ -48,6 +48,11 @@ import org.springframework.lang.Nullable;
  * synchronization other than for purposes of lazy initialization within the
  * FactoryBean itself (or the like).
  *
+ *
+ * 该接口非常重要
+ * 用户可以通过该接口实现定制化bean
+ *
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @since 08.03.2003

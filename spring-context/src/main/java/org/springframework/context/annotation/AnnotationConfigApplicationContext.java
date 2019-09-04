@@ -41,6 +41,8 @@ import org.springframework.util.Assert;
  *
  * <p>See @{@link Configuration}'s javadoc for usage examples.
  *
+ * 基于注解来使用的，不需要配置文件，采用 java 配置类和各种注解来配置
+ *
  * @author Juergen Hoeller
  * @author Chris Beams
  * @since 3.0

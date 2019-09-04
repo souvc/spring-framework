@@ -149,8 +149,8 @@ configure(allprojects) { project ->
 	}
 
 	repositories {
-		maven { url "https://repo.spring.io/libs-release" }
 		mavenLocal()
+		maven { url "https://repo.spring.io/libs-release" }
 	}
 
 	dependencies {

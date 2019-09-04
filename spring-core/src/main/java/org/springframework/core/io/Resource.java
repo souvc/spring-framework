@@ -34,6 +34,11 @@ import org.springframework.lang.Nullable;
  * physical form, but a URL or File handle can just be returned for
  * certain resources. The actual behavior is implementation-specific.
  *
+ * Resource接口抽象了所有Spring内部使用到的底层资源：File、URL、Classpath等。
+ * Resource接口还提供了不同资源到URL、URI、File类型的转换，以及获取lastModified属性、文件名(不带路径信息的文件名，getFilename())的方法，
+ * 为了便于操作，Resource还提供了基于当前资源创建一个相对资源的方法：createRelative()，
+ * 还提供了getDescription()方法用于在错误处理中的打印信息
+ *
  * @author Juergen Hoeller
  * @since 28.12.2003
  * @see #getInputStream()
@@ -42,12 +47,12 @@ import org.springframework.lang.Nullable;
  * @see #getFile()
  * @see WritableResource
  * @see ContextResource
- * @see UrlResource
- * @see FileUrlResource
- * @see FileSystemResource
- * @see ClassPathResource
- * @see ByteArrayResource
- * @see InputStreamResource
+ * @see UrlResource  URL资源
+ * @see FileUrlResource  file
+ * @see FileSystemResource  文件系统
+ * @see ClassPathResource 类路径
+ * @see ByteArrayResource 数组
+ * @see InputStreamResource  流
  */
 public interface Resource extends InputStreamSource {
 
@@ -56,6 +61,8 @@ public interface Resource extends InputStreamSource {
 	 * <p>This method performs a definitive existence check, whereas the
 	 * existence of a {@code Resource} handle only guarantees a valid
 	 * descriptor handle.
+	 *
+	 * 是否存在
 	 */
 	boolean exists();
 
@@ -67,6 +74,9 @@ public interface Resource extends InputStreamSource {
 	 * Note that actual content reading may still fail when attempted.
 	 * However, a value of {@code false} is a definitive indication
 	 * that the resource content cannot be read.
+	 *
+	 * 是否可读
+	 *
 	 * @see #getInputStream()
 	 * @see #exists()
 	 */
@@ -79,6 +89,9 @@ public interface Resource extends InputStreamSource {
 	 * If {@code true}, the InputStream cannot be read multiple times,
 	 * and must be read and closed to avoid resource leaks.
 	 * <p>Will be {@code false} for typical resource descriptors.
+	 *
+	 * 是否处于打开状态
+	 *
 	 */
 	default boolean isOpen() {
 		return false;

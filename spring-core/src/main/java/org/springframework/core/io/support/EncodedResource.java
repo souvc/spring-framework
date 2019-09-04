@@ -35,6 +35,10 @@ import org.springframework.util.ObjectUtils;
  * <p>Used as an argument for operations that support reading content with
  * a specific encoding, typically via a {@code java.io.Reader}.
  *
+ *
+ * EncodeResource主要用于对资源文件的编码进行处理。
+ * 其主要逻辑体现在getReader()方法中，当设置了编码属性的时候Spring会使用相应的编码作为输入流的编码
+ *
  * @author Juergen Hoeller
  * @author Sam Brannen
  * @since 1.2.6

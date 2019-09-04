@@ -66,6 +66,9 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 
 	/**
 	 * Create a new ClassPathXmlApplicationContext for bean-style configuration.
+	 *
+	 * 如果已经有 ApplicationContext 并需要配置成父子关系，那么调用这个构造方法
+	 *
 	 * @param parent the parent context
 	 * @see #setConfigLocation
 	 * @see #setConfigLocations
@@ -139,8 +142,17 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 			throws BeansException {
 
 		super(parent);
+
+		//设置配置路径
 		setConfigLocations(configLocations);
+
 		if (refresh) {
+
+			//这里简单说下为什么是 refresh()，而不是 init() 这种名字的方法。
+			// 因为 ApplicationContext 建立起来以后，其实我们是可以通过调用 refresh() 这个方法重建的，
+			// 这样会将原来的 ApplicationContext 销毁，然后再重新执行一次初始化操作。
+
+			//refresh 函数基本包含了ApplicationContext提供的全部功能
 			refresh();
 		}
 	}

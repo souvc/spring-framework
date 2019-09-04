@@ -26,6 +26,10 @@ import org.springframework.lang.Nullable;
  * factories that allow setting the parent in a configurable
  * fashion can be found in the ConfigurableBeanFactory interface.
  *
+ * 继承BeanFactory，也就是在BeanFactory定义的功能的基础上增加了对parentFactory的支持
+ *
+ * HierarchicalBeanFactory表示的是这些Bean是有继承关系的，也就是每个Bean 有可能有父Bean。
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @since 07.07.2003

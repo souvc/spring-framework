@@ -64,6 +64,11 @@ import org.springframework.util.xml.XmlValidationModeDetector;
  * talking to the latter's implementation of the
  * {@link org.springframework.beans.factory.support.BeanDefinitionRegistry} interface.
  *
+ *
+ * XML配置文件的读取是Spring中重要的功能，因为Spring的大部分功能都是以配置作为切入点的，
+ * 可以从XmlBeanDefinitionReader中梳理一下资源文件读取、解析及注册的大致脉络
+ *
+ *
  * @author Juergen Hoeller
  * @author Rob Harrop
  * @author Chris Beams
@@ -301,6 +306,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 */
 	@Override
 	public int loadBeanDefinitions(Resource resource) throws BeanDefinitionStoreException {
+		//封装资源文件
 		return loadBeanDefinitions(new EncodedResource(resource));
 	}
 
@@ -327,12 +333,16 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 					"Detected cyclic loading of " + encodedResource + " - check your import definitions!");
 		}
 		try {
+
+			//获取输入流
 			InputStream inputStream = encodedResource.getResource().getInputStream();
 			try {
+				//返回一个资源类，但是不是spring自带的类，而是org.xml.sax.InputSource
 				InputSource inputSource = new InputSource(inputStream);
 				if (encodedResource.getEncoding() != null) {
 					inputSource.setEncoding(encodedResource.getEncoding());
 				}
+				//核心逻辑部分
 				return doLoadBeanDefinitions(inputSource, encodedResource.getResource());
 			}
 			finally {
@@ -377,6 +387,12 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
 
 	/**
+	 *
+	 * 如果不考虑异常的话那么其实只做了3件事
+	 * 1.获取对xml文件的验证模式
+	 * 2.加载xml文件
+	 * 3.根据返回的Document注册Bean信息
+	 *
 	 * Actually load bean definitions from the specified XML file.
 	 * @param inputSource the SAX InputSource to read from
 	 * @param resource the resource descriptor for the XML file
@@ -389,7 +405,9 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 			throws BeanDefinitionStoreException {
 
 		try {
+			//获取xml文件验证模式，加载xml并且返回Document对象
 			Document doc = doLoadDocument(inputSource, resource);
+			//返回Document注册的bean信息
 			int count = registerBeanDefinitions(doc, resource);
 			if (logger.isDebugEnabled()) {
 				logger.debug("Loaded " + count + " bean definitions from " + resource);
@@ -445,10 +463,14 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 */
 	protected int getValidationModeForResource(Resource resource) {
 		int validationModeToUse = getValidationMode();
+
+		//如果手动指定了验证模式，那么就使用指定的验证模式
 		if (validationModeToUse != VALIDATION_AUTO) {
 			return validationModeToUse;
 		}
 		int detectedMode = detectValidationMode(resource);
+
+		//如果未指定，那么就使用自动检测
 		if (detectedMode != VALIDATION_AUTO) {
 			return detectedMode;
 		}
@@ -495,6 +517,9 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	}
 
 	/**
+	 *
+	 *  提取和注册bean
+	 *
 	 * Register the bean definitions contained in the given DOM document.
 	 * Called by {@code loadBeanDefinitions}.
 	 * <p>Creates a new instance of the parser class and invokes
@@ -510,7 +535,10 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
 		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
 		int countBefore = getRegistry().getBeanDefinitionCount();
+
+		//处理逻辑
 		documentReader.registerBeanDefinitions(doc, createReaderContext(resource));
+
 		return getRegistry().getBeanDefinitionCount() - countBefore;
 	}
 

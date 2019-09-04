@@ -101,6 +101,10 @@ import org.springframework.util.ReflectionUtils;
  * See {@link WebApplicationInitializer} Javadoc for examples and detailed usage
  * recommendations.<p>
  *
+ * 1、Servlet 3.0引入的接口，用于在web应用启动时动态添加servlet、filter和listener；
+ * 2、基于spi机制，META-INF/services/javax.servlet.ServletContainerInitializer文件中存放实现该接口的类，这些类会被容器调用；
+ * 3、Servlet容器启动的时候会加载org.springframework.web.SpringServletContainerInitializer这个类，调用初始化类的onStartup方法
+ *
  * @author Chris Beams
  * @author Juergen Hoeller
  * @author Rossen Stoyanchev
