@@ -125,6 +125,8 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		// the new (child) delegate with a reference to the parent for fallback purposes,
 		// then ultimately reset this.delegate back to its original (parent) reference.
 		// this behavior emulates a stack of delegates without actually necessitating one.
+
+		//BeanDefinitionParserDelegate负责解析 Bean 定义
 		BeanDefinitionParserDelegate parent = this.delegate;
 		this.delegate = createDelegate(getReaderContext(), root, parent);
 
@@ -145,6 +147,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 			}
 		}
 
+		//给子类用的钩子方法
 		//解析前处理，留个子类实现
 		preProcessXml(root);
 
@@ -168,6 +171,9 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	/**
 	 * Parse the elements at the root level in the document:
 	 * "import", "alias", "bean".
+	 *
+	 * default namespace 涉及到的就四个标签 <import />、<alias />、<bean /> 和 <beans />，其他的属于 custom 的
+	 *
 	 * @param root the DOM root element of the document
 	 */
 	protected void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate delegate) {
@@ -189,6 +195,8 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 			}
 		}
 		else {
+			//其他的标签，将进入到 delegate.parseCustomElement(element) 这个分支。如我们经常会使用到的 <mvc />、<task />、<context />、<aop />等
+			//同时代码中需要提供相应的 parser 来解析，如 MvcNamespaceHandler、TaskNamespaceHandler、ContextNamespaceHandler、AopNamespaceHandler 等。
 			delegate.parseCustomElement(root);
 		}
 	}
@@ -199,18 +207,21 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 			importBeanDefinitionResource(ele);
 		}
 		//对alias标签处理
+		//<alias name="fromName" alias="toName"/>
 		else if (delegate.nodeNameEquals(ele, ALIAS_ELEMENT)) {
 			processAliasRegistration(ele);
 		}
 
 		//比较常用，着重分析
 		//对bean标签处理
+		//处理 <bean /> 标签定义
 		else if (delegate.nodeNameEquals(ele, BEAN_ELEMENT)) {
 			processBeanDefinition(ele, delegate);
 		}
 		//对beans标签处理
 		else if (delegate.nodeNameEquals(ele, NESTED_BEANS_ELEMENT)) {
 			// recurse
+			//如果碰到的是嵌套的 <beans /> 标签，需要递归
 			doRegisterBeanDefinitions(ele);
 		}
 	}
@@ -314,10 +325,29 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	/**
 	 * Process the given bean element, parsing the bean definition
 	 * and registering it with the registry.
+	 *
+	 <pre>
+	 <bean id="exampleBean" name="name1, name2, name3" class="com.javadoop.ExampleBean"
+	 scope="singleton" lazy-init="true" init-method="init" destroy-method="cleanup">
+	 <constructor-arg type="int" value="7500000"/>
+	 <constructor-arg name="years" value="7500000"/>
+	 <constructor-arg index="0" value="7500000"/>
+	 <property name="beanOne">
+	 <ref bean="anotherExampleBean"/>
+	 </property>
+	 <property name="beanTwo" ref="yetAnotherBean"/>
+	 <property name="integerProperty" value="1"/>
+	 </bean>
+	 <pre/>
+	 *
+	 *
+	 *
+	 *
 	 */
 	protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {
 
 		//通过parseBeanDefinitionElement 方法返回配置文件中各种属性值，比如class，name，id，alias等信息
+		//将 <bean /> 节点中的信息提取出来，然后封装到一个 BeanDefinitionHolder 中
 		BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);
 
 		//如果默认标签下有自定义属性，那么需要对自定义标签进行解析

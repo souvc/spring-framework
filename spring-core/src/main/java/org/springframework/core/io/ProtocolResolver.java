@@ -25,6 +25,9 @@ import org.springframework.lang.Nullable;
  * custom protocols to be handled without subclassing the loader
  * implementation (or application context implementation).
  *
+ * 自定义协议解析器
+ * 实现该接口可以自定义协议进行解析
+ *
  * @author Juergen Hoeller
  * @since 4.3
  * @see DefaultResourceLoader#addProtocolResolver

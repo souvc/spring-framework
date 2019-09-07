@@ -115,6 +115,9 @@ public class ClassPathXmlApplicationContextTests {
 		assertTrue(service.isProperlyDestroyed());
 	}
 
+	/**
+	 * 单个配置文件和class
+	 */
 	@Test
 	public void testSingleConfigLocationWithClass() {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(SIMPLE_CONTEXT, getClass());
@@ -122,6 +125,9 @@ public class ClassPathXmlApplicationContextTests {
 		ctx.close();
 	}
 
+	/**
+	 * 别名和占位符
+	 */
 	@Test
 	public void testAliasWithPlaceholder() {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(
@@ -132,6 +138,10 @@ public class ClassPathXmlApplicationContextTests {
 		ctx.refresh();
 	}
 
+	/**
+	 * 无效的值类型
+	 * @throws IOException
+	 */
 	@Test
 	public void testContextWithInvalidValueType() throws IOException {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
@@ -323,6 +333,10 @@ public class ClassPathXmlApplicationContextTests {
 		assertSame(myMessageSource, beansOfType.values().iterator().next());
 	}
 
+	/**
+	 * Resource 和 InputStream 使用方法
+	 * @throws IOException
+	 */
 	@Test
 	public void testResourceAndInputStream() throws IOException {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(RESOURCE_CONTEXT) {
