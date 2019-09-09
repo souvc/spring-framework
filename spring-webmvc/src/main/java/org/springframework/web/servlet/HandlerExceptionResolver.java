@@ -30,6 +30,8 @@ import org.springframework.lang.Nullable;
  * exception including any checked exception, with potentially fine-grained mappings for
  * specific handlers.
  *
+ * 异常处理接口
+ *
  * @author Juergen Hoeller
  * @since 22.11.2003
  */

@@ -53,6 +53,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * to obtain a {@code HandlerMethod} instance with a bean instance resolved
  * through the associated {@link BeanFactory}.
  *
+ * HandlerMethod是一个封装了方法参数、方法注解，方法返回值等众多元素的类
+ *
  * @author Arjen Poutsma
  * @author Rossen Stoyanchev
  * @author Juergen Hoeller

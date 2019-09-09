@@ -31,6 +31,10 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * <p>This is an SPI class, not used directly by application code.
  *
+ * HTTP 请求处理器适配器
+ * HTTP 请求处理器适配器仅仅支持对HTTP请求处理器适配
+ *
+ *
  * @author Juergen Hoeller
  * @since 2.0
  * @see org.springframework.web.servlet.DispatcherServlet

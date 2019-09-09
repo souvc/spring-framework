@@ -339,6 +339,7 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 			}
 		}
 
+		//断之前是否已经存在过处理该url的handler，对于冲突会抛出异常。
 		Object mappedHandler = this.handlerMap.get(urlPath);
 		if (mappedHandler != null) {
 			if (mappedHandler != resolvedHandler) {
@@ -347,6 +348,8 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 						"]: There is already " + getHandlerDescription(mappedHandler) + " mapped.");
 			}
 		}
+
+		//如果url为"/"，则设置为rootHandler；如果url为"/*"，则设置为defaultHandler；否则作为普通handler进行注册。
 		else {
 			if (urlPath.equals("/")) {
 				if (logger.isTraceEnabled()) {

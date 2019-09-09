@@ -58,6 +58,8 @@ import org.springframework.core.annotation.AliasFor;
  * {@code @RequestMapping} and {@code @SessionAttributes} - on
  * the controller <i>interface</i> rather than on the implementation class.
  *
+ * 使用 @RequestMapping 来映射 Request 请求与处理器
+ *
  * @author Juergen Hoeller
  * @author Arjen Poutsma
  * @author Sam Brannen

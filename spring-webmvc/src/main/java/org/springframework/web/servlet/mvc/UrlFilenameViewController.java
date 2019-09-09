@@ -41,6 +41,8 @@ import org.springframework.web.servlet.HandlerMapping;
  *
  * <p>Thanks to David Barri for suggesting prefix/suffix support!
  *
+ * 将请求URL路径转换为逻辑视图名并返回的实现类
+ *
  * @author Alef Arendsen
  * @author Juergen Hoeller
  * @author Rob Harrop

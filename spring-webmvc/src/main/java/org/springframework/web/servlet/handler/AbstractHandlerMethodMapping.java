@@ -267,6 +267,9 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 			Map<Method, T> methods = MethodIntrospector.selectMethods(userType,
 					(MethodIntrospector.MetadataLookup<T>) method -> {
 						try {
+
+							//getMappingForMethod 为一个抽象方法
+							//具体实现由子类RequestMappingHandlerMapping 实现
 							return getMappingForMethod(method, userType);
 						}
 						catch (Throwable ex) {
@@ -279,6 +282,8 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 			}
 			methods.forEach((method, mapping) -> {
 				Method invocableMethod = AopUtils.selectInvocableMethod(method, userType);
+
+				//注册HandlerMethod
 				registerHandlerMethod(handler, invocableMethod, mapping);
 			});
 		}

@@ -31,6 +31,8 @@ import org.springframework.web.servlet.support.RequestContextUtils;
  * sets the response status code. The view and status can be configured using
  * the provided configuration properties.
  *
+ * 参数化视图控制器，根据参数的逻辑视图名直接选择需要展示的视图
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @author Keith Donald

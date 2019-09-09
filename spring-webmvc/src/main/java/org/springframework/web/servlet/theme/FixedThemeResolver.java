@@ -29,6 +29,8 @@ import org.springframework.lang.Nullable;
  * <p>Note: Does not support {@code setThemeName}, as the fixed theme
  * cannot be changed.
  *
+ * 用于选择一个固定的主题
+ *
  * @author Jean-Pierre Pawlak
  * @author Juergen Hoeller
  * @since 17.06.2003

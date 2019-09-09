@@ -31,6 +31,8 @@ import org.springframework.core.annotation.AliasFor;
  * <p>If the method parameter is {@link java.util.Map Map&lt;String, String&gt;}
  * then the map is populated with all path variable names and values.
  *
+ * 可以使用@PathVariable 来标记一个Controller 的处理方法参数，表示该参数的值将使用URI 模板中对应的变量的值来赋值。
+ *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
  * @since 3.0

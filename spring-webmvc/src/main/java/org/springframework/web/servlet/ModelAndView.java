@@ -35,6 +35,8 @@ import org.springframework.util.CollectionUtils;
  * alternatively a View object can be specified directly. The model
  * is a Map, allowing the use of multiple objects keyed by name.
  *
+ *
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @author Rob Harrop
@@ -158,10 +160,12 @@ public class ModelAndView {
 
 	/**
 	 * Convenient constructor to take a single model object.
-	 * @param viewName name of the View to render, to be resolved
-	 * by the DispatcherServlet's ViewResolver
+	 * @param viewName name of the View to render, to be resolved by the DispatcherServlet's ViewResolver
+	 *                    视图逻辑名称
 	 * @param modelName name of the single entry in the model
+	 *                     传递给视图，模型对象的名称
 	 * @param modelObject the single model object
+	 *                       传递给视图，模型对象的值
 	 */
 	public ModelAndView(String viewName, String modelName, Object modelObject) {
 		this.view = viewName;

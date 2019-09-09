@@ -25,6 +25,11 @@ import org.springframework.lang.Nullable;
  * A strategy interface for retrieving and saving FlashMap instances.
  * See {@link FlashMap} for a general overview of flash attributes.
  *
+ * 请求存储属性，可供其他请求使用
+ * 在重定向的时候非常必要
+ *
+ * 用于存储，检索，管理FlashMap实例
+ *
  * @author Rossen Stoyanchev
  * @since 3.1
  * @see FlashMap

@@ -29,6 +29,8 @@ import org.springframework.lang.Nullable;
  * <p>Implementations are encouraged to support internationalization,
  * i.e. localized view resolution.
  *
+ * ViewResolver 中定义了 resolveViewName ，根据viewName来选择合适类型view来实现
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @see org.springframework.web.servlet.view.InternalResourceViewResolver

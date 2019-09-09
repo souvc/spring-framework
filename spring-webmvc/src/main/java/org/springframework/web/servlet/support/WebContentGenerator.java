@@ -55,6 +55,8 @@ import org.springframework.web.context.support.WebApplicationObjectSupport;
  * deprecated methods {@link #setUseExpiresHeader}, {@link #setUseCacheControlHeader},
  * {@link #setUseCacheControlNoStore} or {@link #setAlwaysMustRevalidate}.
  *
+ * 用于浏览器缓存控制、自定义Controller支持的请求方法类型（默认支持：GET/HEAD/POST）
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @author Brian Clozel
@@ -82,17 +84,20 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 
 
 	/** Set of supported HTTP methods. */
+	/** 支持的请求方法类型，默认支持：GET、HEAD、POST */
 	@Nullable
 	private Set<String> supportedMethods;
 
 	@Nullable
 	private String allowHeader;
 
+	/** 当前请求是否必须有session */
 	private boolean requireSession = false;
 
 	@Nullable
 	private CacheControl cacheControl;
 
+	/** 缓存过期时间，正数表示需要缓存，负数表示不做任何事情 */
 	private int cacheSeconds = -1;
 
 	@Nullable
@@ -102,12 +107,15 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 	// deprecated fields
 
 	/** Use HTTP 1.0 expires header? */
+	/** 是否使用HTTP1.0协议过期响应头：如果true则会在响应头添加“Expires：”；需要配合cacheSeconds使用 */
 	private boolean useExpiresHeader = false;
 
 	/** Use HTTP 1.1 cache-control header? */
+	/** 是否使用HTTP1.1协议的缓存控制响应头，如果true则会在响应头添加；需要配合cacheSeconds使用 */
 	private boolean useCacheControlHeader = true;
 
 	/** Use HTTP 1.1 cache-control header value "no-store"? */
+	/** 是否使用HTTP 1.1协议的缓存控制响应头，如果true则会在响应头添加；需要配合cacheSeconds使用 */
 	private boolean useCacheControlNoStore = true;
 
 	private boolean alwaysMustRevalidate = false;

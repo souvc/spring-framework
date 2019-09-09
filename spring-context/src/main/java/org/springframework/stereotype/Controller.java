@@ -32,6 +32,9 @@ import org.springframework.core.annotation.AliasFor;
  * It is typically used in combination with annotated handler methods based on the
  * {@link org.springframework.web.bind.annotation.RequestMapping} annotation.
  *
+ * @Controller 用于标记在一个类上，使用它标记的类就是一个SpringMVC Controller 对象。
+ * @Controller 定义一个 Controller 控制器
+ *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
  * @since 2.5

@@ -30,6 +30,8 @@ import org.springframework.core.annotation.AliasFor;
  * <p>The method parameter may be declared as type {@link javax.servlet.http.Cookie}
  * or as cookie value type (String, int, etc.).
  *
+ *  使用 @CookieValue 绑定 cookie 的值到 Controller 方法参数
+ *
  * @author Juergen Hoeller
  * @author Sam Brannen
  * @since 3.0

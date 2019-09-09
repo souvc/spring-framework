@@ -42,6 +42,8 @@ import org.springframework.lang.Nullable;
  * order (and thus a priority) for getting applied by the {@code DispatcherServlet}.
  * Non-Ordered instances get treated as lowest priority.
  *
+ * 处理适配器
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @see org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter
@@ -57,6 +59,9 @@ public interface HandlerAdapter {
 	 * <p>{@code
 	 * return (handler instanceof MyHandler);
 	 * }
+	 *
+	 * 判断是否可以使用某个handler
+	 *
 	 * @param handler handler object to check
 	 * @return whether or not this object can use the given handler
 	 */

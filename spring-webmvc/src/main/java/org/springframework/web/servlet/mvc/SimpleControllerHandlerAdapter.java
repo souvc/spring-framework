@@ -30,6 +30,8 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * <p>This is an SPI class, not used directly by application code.
  *
+ * 简单控制器处理器适配器
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @see org.springframework.web.servlet.DispatcherServlet

@@ -63,6 +63,10 @@ import org.springframework.web.method.HandlerMethod;
  * forms and GZIP compression. This typically shows when one needs to map the
  * filter to certain content types (e.g. images), or to all requests.
  *
+ * 拦截器（Interceptor）：在一个流程正在进行的时候，你希望干预它的进展，甚至终止它进行，这是拦截器做的事情。
+ * HandlerInterceptor是springMVC项目中的拦截器，它拦截的目标是请求的地址，比MethodInterceptor先执行。
+ * 实现一个HandlerInterceptor拦截器可以直接实现HandlerInterceptor接口，也可以继承HandlerInterceptorAdapter类。
+ *
  * @author Juergen Hoeller
  * @since 20.06.2003
  * @see HandlerExecutionChain#getInterceptors
@@ -84,6 +88,9 @@ public interface HandlerInterceptor {
 	 * typically sending a HTTP error or writing a custom response.
 	 * <p><strong>Note:</strong> special considerations apply for asynchronous
 	 * request processing. For more details see
+	 *
+	 * 进入拦截器，执行controller调用之前
+	 *
 	 * {@link org.springframework.web.servlet.AsyncHandlerInterceptor}.
 	 * <p>The default implementation returns {@code true}.
 	 * @param request current HTTP request
@@ -110,6 +117,9 @@ public interface HandlerInterceptor {
 	 * getting applied in inverse order of the execution chain.
 	 * <p><strong>Note:</strong> special considerations apply for asynchronous
 	 * request processing. For more details see
+	 *
+	 * 执行完controller逻辑，但是在controller return ModelAndView之前执行，可以控制ModelAndView的值
+	 *
 	 * {@link org.springframework.web.servlet.AsyncHandlerInterceptor}.
 	 * <p>The default implementation is empty.
 	 * @param request current HTTP request
@@ -137,6 +147,9 @@ public interface HandlerInterceptor {
 	 * request processing. For more details see
 	 * {@link org.springframework.web.servlet.AsyncHandlerInterceptor}.
 	 * <p>The default implementation is empty.
+	 *
+	 *  controller return ModelAndView之后，但是在Filter返回客户端之前执行
+	 *
 	 * @param request current HTTP request
 	 * @param response current HTTP response
 	 * @param handler handler (or {@link HandlerMethod}) that started asynchronous

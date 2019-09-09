@@ -50,6 +50,8 @@ import org.springframework.core.annotation.AliasFor;
  * and a parameter name is not specified, then the map parameter is populated
  * with all request parameter names and values.
  *
+ * 使用 @RequestParam 绑定 HttpServletRequest 请求参数到控制器方法参数
+ *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
  * @author Sam Brannen

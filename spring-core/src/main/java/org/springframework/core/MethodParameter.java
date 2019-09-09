@@ -50,6 +50,8 @@ import org.springframework.util.ObjectUtils;
  * subclass available which synthesizes annotations with attribute aliases. That subclass is used
  * for web and message endpoint processing, in particular.
  *
+ * MethodParameter是一个封装了方法参数具体信息的工具类，包括参数的的索引位置，类型，注解，参数名等信息。
+ *
  * @author Juergen Hoeller
  * @author Rob Harrop
  * @author Andy Clement

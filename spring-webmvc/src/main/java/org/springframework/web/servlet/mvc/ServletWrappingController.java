@@ -78,6 +78,8 @@ import org.springframework.web.servlet.ModelAndView;
  *   &lt;/property&gt;
  * &lt;/bean&gt;</pre>
  *
+ *  Servlet包装控制器
+ *
  * @author Juergen Hoeller
  * @since 1.1.1
  * @see ServletForwardingController

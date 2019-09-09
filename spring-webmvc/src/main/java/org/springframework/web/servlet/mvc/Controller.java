@@ -115,6 +115,11 @@ public interface Controller {
 	 * will render. A {@code null} return value is not an error: it indicates that
 	 * this object completed request processing itself and that there is therefore no
 	 * ModelAndView to render.
+	 *
+	 * 接收request和response参数，处理用户请求
+	 * 参数从request中获取
+	 * 方法返回ModelAndView，Model为模型数据，View为视图
+	 *
 	 * @param request current HTTP request
 	 * @param response current HTTP response
 	 * @return a ModelAndView to render, or {@code null} if handled directly

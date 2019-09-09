@@ -52,6 +52,9 @@ import org.springframework.web.util.WebUtils;
  * will simply evaluate and modify corresponding {@code HttpSession} attributes
  * against the current {@code HttpServletRequest}.
  *
+ * 基于Session的配置
+ * 根据本次会话过程中使用的语言
+ *
  * @author Juergen Hoeller
  * @since 27.02.2003
  * @see #setDefaultLocale

@@ -47,6 +47,8 @@ import org.springframework.util.CollectionUtils;
  * is to map within the current servlet mapping if applicable; see the
  * {@link #setAlwaysUseFullPath "alwaysUseFullPath"} property. For details on the
  * pattern options, see the {@link org.springframework.util.AntPathMatcher} javadoc.
+ *
+ * 最简单的映射处理器
 
  * @author Rod Johnson
  * @author Juergen Hoeller
@@ -67,6 +69,47 @@ public class SimpleUrlHandlerMapping extends AbstractUrlHandlerMapping {
 	 * @param mappings properties with URLs as keys and bean names as values
 	 * @see #setUrlMap
 	 */
+
+
+	/**
+	 * 举个例子
+	 *
+	 * 第一种
+	 <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		 <property name="mappings">
+			 <props>
+	 			<prop key="/welcome.htm">welcomeController</prop>
+	            <prop key="/*\/welcome.htm">welcomeController</prop>
+	 			<prop key="/helloGuest.htm">helloGuestController</prop>
+			</props>
+		 </property>
+	 </bean>
+	 welcomeController,welcomeController,helloGuestController 分别通过bean定义
+
+	 第二种
+	 注意：此时urlMap.properties文件应放在WebRoot目录下
+	 <property name="mappings">
+	      <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	      <property name="location">
+	           <value>urlMap.properties</value>
+	       </property>
+	 </bean>
+	 </property>
+
+	 第三种
+	 <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	 <property name="mappings">
+	 	   <value>
+				/welcome.htm=welcomeController
+				/*\/welcome.htm=welcomeController
+				/helloGuest.htm=helloGuestController
+	       </value>
+       </property>
+    </bean>
+
+
+	 * @param mappings
+	 */
 	public void setMappings(Properties mappings) {
 		CollectionUtils.mergePropertiesIntoMap(mappings, this.urlMap);
 	}
@@ -78,6 +121,17 @@ public class SimpleUrlHandlerMapping extends AbstractUrlHandlerMapping {
 	 * details, see the {@link org.springframework.util.AntPathMatcher} javadoc.
 	 * @param urlMap map with URLs as keys and beans as values
 	 * @see #setMappings
+	 */
+
+	/**
+	 * 举个例子
+	 *
+	 <property name="urlMap">
+	     <map>
+	           <entry key="/base/login.htm" value-ref="loginController"/>
+	     </map>
+	 </property>
+	 * @param urlMap
 	 */
 	public void setUrlMap(Map<String, ?> urlMap) {
 		this.urlMap.putAll(urlMap);
@@ -107,6 +161,11 @@ public class SimpleUrlHandlerMapping extends AbstractUrlHandlerMapping {
 
 	/**
 	 * Register all handlers specified in the URL map for the corresponding paths.
+	 *
+	 * registerHandlers()作用是：
+	 * 1、将所有url全部前面补全，
+	 * 2、对每个url及对应的handler执行registerHandler方法。
+	 *
 	 * @param urlMap a Map with URL paths as keys and handler beans or bean names as values
 	 * @throws BeansException if a handler couldn't be registered
 	 * @throws IllegalStateException if there is a conflicting handler registered

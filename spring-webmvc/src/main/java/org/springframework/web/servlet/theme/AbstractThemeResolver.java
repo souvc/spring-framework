@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ThemeResolver;
  * Abstract base class for {@link ThemeResolver} implementations.
  * Provides support for a default theme name.
  *
+ * 用户可以继承该类来自定义主题解析器
+ *
  * @author Juergen Hoeller
  * @author Jean-Pierre Pawlak
  * @since 17.06.2003

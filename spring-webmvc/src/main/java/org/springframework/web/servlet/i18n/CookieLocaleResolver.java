@@ -42,6 +42,9 @@ import org.springframework.web.util.WebUtils;
  * The cookie may optionally contain an associated time zone value as well;
  * alternatively, you may specify a default time zone.
  *
+ * 基于Cookie国际化配置
+ * 通过浏览器的cookie设置取得Local对象
+ *
  * <p>Custom controllers can override the user's locale and time zone by calling
  * {@code #setLocale(Context)} on the resolver, e.g. responding to a locale change
  * request. As a more convenient alternative, consider using

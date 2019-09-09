@@ -35,6 +35,8 @@ import org.springframework.web.util.WebUtils;
  * <p>Custom controllers can thus override the user's theme by calling
  * {@code setThemeName}, e.g. responding to a certain theme change request.
  *
+ * 用于实现用户选择的主题，以cookie的形式存放于客户端的机器上
+ *
  * @author Jean-Pierre Pawlak
  * @author Juergen Hoeller
  * @since 17.06.2003

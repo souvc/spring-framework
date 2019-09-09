@@ -25,6 +25,8 @@ import org.springframework.lang.Nullable;
  * {@link javax.servlet.http.HttpServletRequest} into a
  * logical view name when no view name is explicitly supplied.
  *
+ * 约定没有返回视图名称的时候如何确定视图名称
+ *
  * @author Rob Harrop
  * @author Juergen Hoeller
  * @since 2.0

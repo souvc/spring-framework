@@ -88,6 +88,9 @@ import org.springframework.web.util.WebUtils;
  * </tr>
  * </table>
  *
+ *
+ * 控制浏览器缓存、支持的请求方法
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @author Rossen Stoyanchev
@@ -95,6 +98,7 @@ import org.springframework.web.util.WebUtils;
  */
 public abstract class AbstractController extends WebContentGenerator implements Controller {
 
+	/** 表示该控制器是否在执行时同步session，从而保证该会话的用户串行访问该控制器 */
 	private boolean synchronizeOnSession = false;
 
 
@@ -149,6 +153,9 @@ public abstract class AbstractController extends WebContentGenerator implements 
 	}
 
 
+	/**
+	 *实现Controller接口的handleRequest方法
+	 */
 	@Override
 	@Nullable
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
@@ -160,10 +167,14 @@ public abstract class AbstractController extends WebContentGenerator implements 
 		}
 
 		// Delegate to WebContentGenerator for checking and preparing.
+		// 检查是否支持请求方法以及必须的session
 		checkRequest(request);
+
+		//根据设置准备response
 		prepareResponse(response);
 
 		// Execute handleRequestInternal in synchronized block if required.
+		// 如果必要顺序执行handleRequestInternal方法
 		if (this.synchronizeOnSession) {
 			HttpSession session = request.getSession(false);
 			if (session != null) {

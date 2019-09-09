@@ -37,6 +37,15 @@ import org.springframework.util.ClassUtils;
  * always needs to be last, as it will attempt to resolve any view name,
  * no matter whether the underlying resource actually exists.
  *
+ * 配置jsp相关ViewResolver
+
+ <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	 <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+	 <property name="prefix" value="/WEB-INF/pages/"/>
+	 <property name="suffix" value=".jsp"/>
+ </bean>
+
+ *
  * @author Juergen Hoeller
  * @since 17.02.2003
  * @see #setViewClass

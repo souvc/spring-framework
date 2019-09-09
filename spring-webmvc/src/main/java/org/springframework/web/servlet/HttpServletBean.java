@@ -71,6 +71,9 @@ import org.springframework.web.context.support.StandardServletEnvironment;
  * class which loads its own application context. FrameworkServlet serves
  * as direct base class of Spring's full-fledged {@link DispatcherServlet}.
  *
+ * HttpServletBean继承自HttpServlet。
+ * 主要做一些初始化的工作，将web.xml中配置的参数设置到Servlet中。比如servlet标签的子标签init-param标签中配置的参数。
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @see #addRequiredProperty
@@ -143,18 +146,28 @@ public abstract class HttpServletBean extends HttpServlet implements Environment
 	 * invoke subclass initialization.
 	 * @throws ServletException if bean properties are invalid (or required
 	 * properties are missing), or if subclass initialization fails.
+	 *
+	 * HttpServletBean覆写了init方法，对初始化过程做了一些处理。
+	 *
 	 */
 	@Override
 	public final void init() throws ServletException {
 
 		// Set bean properties from init parameters.
+		//ServletConfigPropertyValues是HttpServletBean静态内部类，构造的过程中会使用
 		PropertyValues pvs = new ServletConfigPropertyValues(getServletConfig(), this.requiredProperties);
 		if (!pvs.isEmpty()) {
 			try {
 				BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(this);
+
+				//获得资源文件并加载
 				ResourceLoader resourceLoader = new ServletContextResourceLoader(getServletContext());
 				bw.registerCustomEditor(Resource.class, new ResourceEditor(resourceLoader, getEnvironment()));
+
+				//留给子类拓展
 				initBeanWrapper(bw);
+
+				//设置属性
 				bw.setPropertyValues(pvs, true);
 			}
 			catch (BeansException ex) {
@@ -166,6 +179,7 @@ public abstract class HttpServletBean extends HttpServlet implements Environment
 		}
 
 		// Let subclasses do whatever initialization they like.
+		//模板方法，留给子类实现
 		initServletBean();
 	}
 
@@ -220,6 +234,7 @@ public abstract class HttpServletBean extends HttpServlet implements Environment
 			Set<String> missingProps = (!CollectionUtils.isEmpty(requiredProperties) ?
 					new HashSet<>(requiredProperties) : null);
 
+			//在ServletConfig 中找出初始化的参数
 			Enumeration<String> paramNames = config.getInitParameterNames();
 			while (paramNames.hasMoreElements()) {
 				String property = paramNames.nextElement();

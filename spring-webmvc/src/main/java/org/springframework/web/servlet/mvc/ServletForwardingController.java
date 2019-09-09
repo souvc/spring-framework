@@ -80,6 +80,9 @@ import org.springframework.web.util.WebUtils;
  *   &lt;property name="servletName"&gt;&lt;value&gt;myServlet&lt;/value&gt;&lt;/property&gt;
  * &lt;/bean&gt;</pre>
  *
+ *
+ *  将Spring Handler接收的请求转发给一个Servlet去执行
+ *
  * @author Juergen Hoeller
  * @since 1.1.1
  * @see ServletWrappingController
