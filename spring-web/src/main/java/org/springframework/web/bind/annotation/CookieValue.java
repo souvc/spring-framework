@@ -31,6 +31,7 @@ import org.springframework.core.annotation.AliasFor;
  * or as cookie value type (String, int, etc.).
  *
  *  使用 @CookieValue 绑定 cookie 的值到 Controller 方法参数
+ *  cookie数据到处理器功能处理方法的方法参数上的绑定；
  *
  * @author Juergen Hoeller
  * @author Sam Brannen

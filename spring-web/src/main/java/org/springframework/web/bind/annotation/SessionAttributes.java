@@ -51,6 +51,8 @@ import org.springframework.core.annotation.AliasFor;
  * such as {@code @RequestMapping} and {@code @SessionAttributes} &mdash; on
  * the controller <i>interface</i> rather than on the implementation class.
  *
+ * 用于声明session级别存储的属性，放置在处理器类上，通常列出模型属性（如@ModelAttribute）对应的名称
+ *
  * @author Juergen Hoeller
  * @author Sam Brannen
  * @since 2.5

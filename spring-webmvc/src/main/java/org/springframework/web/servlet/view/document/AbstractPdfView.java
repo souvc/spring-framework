@@ -55,17 +55,29 @@ public abstract class AbstractPdfView extends AbstractView {
 	 * This constructor sets the appropriate content type "application/pdf".
 	 * Note that IE won't take much notice of this, but there's not a lot we
 	 * can do about this. Generated documents should have a ".pdf" extension.
+	 * 设置了返回类型
 	 */
 	public AbstractPdfView() {
 		setContentType("application/pdf");
 	}
 
 
+	/**
+	 * 	这里默认是下载
+	 */
 	@Override
 	protected boolean generatesDownloadContent() {
 		return true;
 	}
 
+	/**
+	 *  这个方法和名字描述一样，就是创建输出模型的，总的来说是创建Document
+	 * @param model combined output Map (never {@code null}),
+	 * with dynamic values taking precedence over static attributes
+	 * @param request current HTTP request
+	 * @param response current HTTP response
+	 * @throws Exception
+	 */
 	@Override
 	protected final void renderMergedOutputModel(
 			Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -81,10 +93,14 @@ public abstract class AbstractPdfView extends AbstractView {
 
 		// Build PDF document.
 		document.open();
+
+		// 具体PDF内容让子类自己处理
 		buildPdfDocument(model, document, writer, request, response);
+
 		document.close();
 
 		// Flush to HTTP response.
+		// 返回客户端
 		writeToResponse(response, baos);
 	}
 
@@ -93,6 +109,9 @@ public abstract class AbstractPdfView extends AbstractView {
 	 * <p>By default returns an A4 document, but the subclass can specify any
 	 * Document, possibly parameterized via bean properties defined on the View.
 	 * @return the newly created iText Document instance
+	 *
+	 * 默认A4 大小
+	 *
 	 * @see com.lowagie.text.Document#Document(com.lowagie.text.Rectangle)
 	 */
 	protected Document newDocument() {

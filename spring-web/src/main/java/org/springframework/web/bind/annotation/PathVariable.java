@@ -33,6 +33,8 @@ import org.springframework.core.annotation.AliasFor;
  *
  * 可以使用@PathVariable 来标记一个Controller 的处理方法参数，表示该参数的值将使用URI 模板中对应的变量的值来赋值。
  *
+ * 请求URI中的模板变量部分到处理器功能处理方法的方法参数上的绑定，从而支持RESTful架构风格的URI；
+ *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
  * @since 3.0

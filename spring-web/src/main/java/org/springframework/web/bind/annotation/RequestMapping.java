@@ -60,6 +60,8 @@ import org.springframework.core.annotation.AliasFor;
  *
  * 使用 @RequestMapping 来映射 Request 请求与处理器
  *
+ * 请求到处理器功能方法的映射规则；
+ *
  * @author Juergen Hoeller
  * @author Arjen Poutsma
  * @author Sam Brannen

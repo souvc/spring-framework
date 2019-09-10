@@ -58,6 +58,8 @@ package org.springframework.validation;
  * the {@code Validator} interface and its role in an enterprise
  * application.
  *
+ * 验证器
+ *
  * @author Rod Johnson
  * @see SmartValidator
  * @see Errors

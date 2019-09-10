@@ -149,7 +149,8 @@ import org.springframework.web.util.WebUtils;
  * 3.0+ environments, which support programmatic registration of servlet instances.
  * See the {@link #DispatcherServlet(WebApplicationContext)} javadoc for details.
  *
- * 前端控制器的具体实现
+ * 前端控制器
+ *
  * 所有的web请求都需要通过这个类来处理，进行转发，匹配，数据处理，并转换页面进行展现
  * SpringMVC中最为核心的部分
  * 初始化各个功能的实现类。比如异常处理、视图处理、请求映射处理等。
@@ -1029,6 +1030,9 @@ public class DispatcherServlet extends FrameworkServlet {
 	 * SpringMVC 请求分发方法
 	 * 核心也是最重要的http请求处理的方法，通过URL选择合适的controller，选择具体的modelandview，再渲染生成数据回调等等操作
 	 *
+	 * 1、首先用户发送请求——>DispatcherServlet，
+	 * 前端控制器收到请求后自己不进行处理，而是委托给其他的解析器进行处理，作为统一访问点，进行全局的流程控制；
+	 *
 	 * @param request current HTTP request
 	 * @param response current HTTP response
 	 * @throws Exception in case of any kind of processing failure
@@ -1063,7 +1067,8 @@ public class DispatcherServlet extends FrameworkServlet {
 				multipartRequestParsed = (processedRequest != request);
 
 				// Determine handler for the current request.
-				//各种处理器的加载和实现
+				// 2、DispatcherServlet——>HandlerMapping，HandlerMapping将会把请求映射为HandlerExecutionChain对象（包含一个Handler处理器（页面控制器）对象、多个HandlerInterceptor拦截器）对象，
+				// 通过这种策略模式，很容易添加新的映射策略；
 				mappedHandler = getHandler(processedRequest);
 				if (mappedHandler == null) {
 
@@ -1074,10 +1079,11 @@ public class DispatcherServlet extends FrameworkServlet {
 				}
 
 				// Determine handler adapter for the current request.
-				// 检测当前获取的controller是否合适,并且得到合适的HandlerAdapter
+				//3、DispatcherServlet——>HandlerAdapter，HandlerAdapter将会把处理器包装为适配器，从而支持多种类型的处理器，即适配器设计模式的应用，从而很容易支持很多类型的处理器；
 				HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());
 
 				// Process last-modified header, if supported by the handler.
+				// 304 Not Modified缓存支持
 				String method = request.getMethod();
 				boolean isGet = "GET".equals(method);
 				if (isGet || "HEAD".equals(method)) {
@@ -1094,6 +1100,8 @@ public class DispatcherServlet extends FrameworkServlet {
 				}
 
 				// Actually invoke the handler.
+				//4、HandlerAdapter——>处理器功能处理方法的调用，HandlerAdapter将会根据适配的结果调用真正的处理器的功能处理方法，完成功能处理；
+				// 并返回一个ModelAndView对象（包含模型数据、逻辑视图名）；
 				mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
 
 				if (asyncManager.isConcurrentHandlingStarted()) {

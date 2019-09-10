@@ -29,6 +29,8 @@ import java.lang.annotation.Target;
  * <p>As of version 4.0 this annotation can also be added on the type level in
  * which case it is inherited and does not need to be added on the method level.
  *
+ * 处理器功能处理方法的返回值作为响应体（通过HttpMessageConverter进行类型转换）；
+ *
  * @author Arjen Poutsma
  * @since 3.0
  * @see RequestBody

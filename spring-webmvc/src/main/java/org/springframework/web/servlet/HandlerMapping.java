@@ -46,6 +46,8 @@ import org.springframework.lang.Nullable;
  * interface to be able to specify a sorting order and thus a priority for getting
  * applied by DispatcherServlet. Non-Ordered instances get treated as lowest priority.
  *
+ * 处理器映射
+ *
  * 根据请求找到相对应的处理器Handler和Interceptor
  *
  * 我们可以自定义实现一个HandlerMapping，这样可以根据请求，然后转发到需要的控制器

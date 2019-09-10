@@ -95,6 +95,8 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * <p>Controllers can optionally implement the {@link LastModified} interface.
  *
+ * 处理器或页面控制器
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @see LastModified
@@ -119,6 +121,8 @@ public interface Controller {
 	 * 接收request和response参数，处理用户请求
 	 * 参数从request中获取
 	 * 方法返回ModelAndView，Model为模型数据，View为视图
+	 *
+	 * 用于进行请求的功能处理，处理完请求后返回ModelAndView（Model模型数据部分 和 View视图部分）。
 	 *
 	 * @param request current HTTP request
 	 * @param response current HTTP response

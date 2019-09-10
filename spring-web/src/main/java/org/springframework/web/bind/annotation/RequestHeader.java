@@ -34,6 +34,8 @@ import org.springframework.core.annotation.AliasFor;
  * or {@link org.springframework.http.HttpHeaders HttpHeaders} then the map is
  * populated with all header names and values.
  *
+ *  请求头（header）数据到处理器功能处理方法的方法参数上的绑定；
+ *
  * @author Juergen Hoeller
  * @author Sam Brannen
  * @since 3.0

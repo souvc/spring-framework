@@ -94,6 +94,8 @@ import java.lang.annotation.Target;
  * <p>You may combine the {@code ExceptionHandler} annotation with
  * {@link ResponseStatus @ResponseStatus} for a specific HTTP error status.
  *
+ * 注解式声明异常处理器
+ *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
  * @since 3.0

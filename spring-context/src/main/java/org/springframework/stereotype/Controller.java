@@ -35,6 +35,8 @@ import org.springframework.core.annotation.AliasFor;
  * @Controller 用于标记在一个类上，使用它标记的类就是一个SpringMVC Controller 对象。
  * @Controller 定义一个 Controller 控制器
  *
+ * 用于标识是处理器类；
+ *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
  * @since 2.5

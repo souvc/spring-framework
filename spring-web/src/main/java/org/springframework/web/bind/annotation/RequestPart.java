@@ -52,6 +52,8 @@ import org.springframework.web.multipart.MultipartResolver;
  * {@link RequestPart} is likely to be used with parts containing more complex content
  * e.g. JSON, XML).
  *
+ * 提供对“multipart/form-data”请求的全面支持，支持Servlet 3.0文件上传
+ *
  * @author Rossen Stoyanchev
  * @author Arjen Poutsma
  * @author Sam Brannen

@@ -48,6 +48,8 @@ import org.springframework.http.HttpStatus;
  * {@code @ResponseStatus} and is then inherited by all {@code @RequestMapping}
  * methods.
  *
+ * 定义处理器功能处理方法/异常处理器返回的状态码和原因
+ *
  * @author Arjen Poutsma
  * @author Sam Brannen
  * @since 3.0

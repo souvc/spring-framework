@@ -32,6 +32,8 @@ import org.springframework.http.converter.HttpMessageConverter;
  *
  * <p>Supported for annotated handler methods.
  *
+ * 请求的body体的绑定（通过HttpMessageConverter进行类型转换）
+ *
  * @author Arjen Poutsma
  * @since 3.0
  * @see RequestHeader

@@ -37,6 +37,8 @@ import java.lang.annotation.Target;
  * in combination with {@link org.springframework.web.context.request.WebRequest}
  * or {@link java.util.Locale}, allowing to register context-specific editors.
  *
+ * 自定义数据绑定注册支持，用于将请求参数转换到命令对象属性的对应类型；
+ *
  * @author Juergen Hoeller
  * @since 2.5
  * @see org.springframework.web.bind.WebDataBinder

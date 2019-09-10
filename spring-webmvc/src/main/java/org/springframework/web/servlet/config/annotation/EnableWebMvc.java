@@ -88,6 +88,9 @@ import org.springframework.context.annotation.Import;
  * }
  * </pre>
  *
+ *
+ * EnableWebMvc：用于在基于Java类定义Bean配置中开启MVC支持，和XML中的<mvc:annotation-driven>功能一样
+ *
  * @author Dave Syer
  * @author Rossen Stoyanchev
  * @since 3.1

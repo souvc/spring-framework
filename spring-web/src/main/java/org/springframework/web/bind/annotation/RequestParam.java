@@ -52,6 +52,8 @@ import org.springframework.core.annotation.AliasFor;
  *
  * 使用 @RequestParam 绑定 HttpServletRequest 请求参数到控制器方法参数
  *
+ * 请求参数到处理器功能处理方法的方法参数上的绑定；
+ *
  * @author Arjen Poutsma
  * @author Juergen Hoeller
  * @author Sam Brannen

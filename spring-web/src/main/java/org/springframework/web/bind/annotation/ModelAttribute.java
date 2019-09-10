@@ -49,6 +49,8 @@ import org.springframework.ui.Model;
  * {@link ExceptionHandler @ExceptionHandler} methods do not provide
  * access to a {@link Model} argument.
  *
+ * 请求参数到命令对象的绑定
+ *
  * @author Juergen Hoeller
  * @author Rossen Stoyanchev
  * @since 2.5
