@@ -72,6 +72,8 @@ import org.springframework.core.annotation.AliasFor;
  * As of Spring Framework 4.0, this annotation may be used as a <em>meta-annotation</em>
  * to create custom <em>composed annotations</em>.
  *
+ * 是 Spring test context 提供的，用来指定 Spring 配置信息的来源，支持指定 XML 文件位置或者 Spring 配置类名
+ *
  * @author Sam Brannen
  * @since 2.5
  * @see ContextHierarchy

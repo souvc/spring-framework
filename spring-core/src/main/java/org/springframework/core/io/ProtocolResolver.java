@@ -19,14 +19,17 @@ package org.springframework.core.io;
 import org.springframework.lang.Nullable;
 
 /**
+ *
+ * ProtocolResolver ，用户自定义协议资源解决策略，它允许用户自定义资源加载协议，而不需要继承 ResourceLoader 的子类。
+ *
+ * 自定义协议解析器
+ * 实现该接口可以自定义协议进行解析
+ *
  * A resolution strategy for protocol-specific resource handles.
  *
  * <p>Used as an SPI for {@link DefaultResourceLoader}, allowing for
  * custom protocols to be handled without subclassing the loader
  * implementation (or application context implementation).
- *
- * 自定义协议解析器
- * 实现该接口可以自定义协议进行解析
  *
  * @author Juergen Hoeller
  * @since 4.3
@@ -36,6 +39,9 @@ import org.springframework.lang.Nullable;
 public interface ProtocolResolver {
 
 	/**
+	 *
+	 * 接收两个参数：资源路径location，指定的加载器 ResourceLoader，返回为相应的 Resource
+	 *
 	 * Resolve the given location against the given resource loader
 	 * if this implementation's protocol matches.
 	 * @param location the user-specified resource location

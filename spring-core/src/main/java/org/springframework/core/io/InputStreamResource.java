@@ -23,6 +23,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
+ *
+ * 代表输入二进制流的资源
+ *
+ * 资源以输入的二进制流的形式存在，内部实现是以不可变的InputStream加上不可变的描述符组成。
+ * 比较简单，类似与 ByteArrayResource
+ *
  * {@link Resource} implementation for a given {@link InputStream}.
  * <p>Should only be used if no other specific {@code Resource} implementation
  * is applicable. In particular, prefer {@link ByteArrayResource} or any of the

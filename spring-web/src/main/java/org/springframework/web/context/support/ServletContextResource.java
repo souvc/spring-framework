@@ -34,6 +34,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.util.WebUtils;
 
 /**
+ *
+ * Web容器上下文的资源，相对于Web应用程序根目录的路径加载资源。
+ * 该类的实现在Spring-web 的包中。
+ * 继承抽象类AbstractFileResolvingResource和实现了接口 ContextResource。
+ *
  * {@link org.springframework.core.io.Resource} implementation for
  * {@link javax.servlet.ServletContext} resources, interpreting
  * relative paths within the web application root directory.
@@ -147,6 +152,9 @@ public class ServletContextResource extends AbstractFileResolvingResource implem
 	}
 
 	/**
+	 *
+	 * 获取web应用程序上下文的资源二进制流
+	 *
 	 * This implementation delegates to {@code ServletContext.getResourceAsStream},
 	 * but throws a FileNotFoundException if no resource found.
 	 * @see javax.servlet.ServletContext#getResourceAsStream(String)

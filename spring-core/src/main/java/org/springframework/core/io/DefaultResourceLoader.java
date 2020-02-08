@@ -31,6 +31,12 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 
 /**
+ * ResourceLoader接口的主要实现是在其子类 DefaultResourceLoader
+ *
+ * DefaultResourceLoader 是 ResourceLoader 的默认实现，
+ * 在自定 ResourceLoader 的时候我们除了可以继承该类外还可以实现 ProtocolResolver 接口来实现自定资源加载协议。
+ *
+ *
  * Default implementation of the {@link ResourceLoader} interface.
  * Used by {@link ResourceEditor}, and serves as base class for
  * {@link org.springframework.context.support.AbstractApplicationContext}.
@@ -98,6 +104,10 @@ public class DefaultResourceLoader implements ResourceLoader {
 	}
 
 	/**
+	 *
+	 * 在 Spring 中接口并没有实现类，它需要用户自定义，自定义的 Resolver
+	 * 可以通过调用DefaultResourceLoader.addProtocolResolver() 添加
+	 *
 	 * Register the given resolver with this resource loader, allowing for
 	 * additional protocols to be handled.
 	 * <p>Any such resolver will be invoked ahead of this loader's standard
@@ -140,34 +150,45 @@ public class DefaultResourceLoader implements ResourceLoader {
 	}
 
 
+	/**
+	 * 根据提供的 location 返回相应的 Resource，而 DefaultResourceLoader 对该方法提供了核心实现
+	 * @param location the resource location
+	 * @return
+	 */
 	@Override
 	public Resource getResource(String location) {
 		Assert.notNull(location, "Location must not be null");
-		// ①优先遍历协议解决器集，如果可以解决，则返回位置相应的资源
+
+		// ① 首先通过 ProtocolResolver 来加载自定义协议资源，成功返回 Resource
 		for (ProtocolResolver protocolResolver : this.protocolResolvers) {
 			Resource resource = protocolResolver.resolve(location, this);
 			if (resource != null) {
 				return resource;
 			}
 		}
-		// ②如果资源位置以"/"开头，则获取路径资源
+
+		// ② 若 location 以 / 开头，则调用 getResourceByPath()构造 ClassPathContextResource 类型资源并返回。
 		if (location.startsWith("/")) {
 			return getResourceByPath(location);
 		}
-		// ③如果资源位置以"classpath:"开头，创建路径位置的的类路径资源ClassPathResource
+
+		// ③ 若 location 以 classpath: 开头，则构造 ClassPathResource 类型资源并返回。
 		else if (location.startsWith(CLASSPATH_URL_PREFIX)) {
 			return new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader());
 		}
 		else {
 			try {
 				// Try to parse the location as a URL...
-				// ④尝试将路径转换为URL资源
+				// ④ 构造 URL ，尝试通过它进行资源定位，若没有抛出 MalformedURLException 异常，则判断是否为 FileURL ,
+				// 如果是则构造 FileUrlResource 类型资源，否则构造 UrlResource。若在加载过程中抛出 MalformedURLException 异常，
+				// 则委派 getResourceByPath() 实现资源定位加载。
 				URL url = new URL(location);
 				return (ResourceUtils.isFileURL(url) ? new FileUrlResource(url) : new UrlResource(url));
 			}
 			catch (MalformedURLException ex) {
 				// No URL -> resolve as resource path.
-				// ⑤没有成功转换为URL资源,则将location视为资源路径并返回对应解析资源
+				// ⑤ 如果通过URL没有定位到资源，那么将会抛出 MalformedURLException异常，此时会通过getResourceByPath 来进行资源查找，
+				// 在DefaultResourceLoader 中getResourceByPath 方法默认实现逻辑是构造ClassPathResource类型的资源
 				return getResourceByPath(location);
 			}
 		}

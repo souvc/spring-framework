@@ -38,6 +38,11 @@ package org.springframework.core.io;
 public class FileSystemResourceLoader extends DefaultResourceLoader {
 
 	/**
+	 *
+	 * FileSystemResourceLoader继承DefaultResourceLoader，DefaultResourceLoader
+	 * 在最后getResourceByPath 中通过构造ClassPathContextResource 资源，
+	 * 在FileSystemResourceLoader 中重写了该方法，使之从文件系统加载资源。
+	 *
 	 * Resolve resource paths as file system paths.
 	 * <p>Note: Even if a given path starts with a slash, it will get
 	 * interpreted as relative to the current VM working directory.

@@ -25,6 +25,12 @@ import java.nio.channels.WritableByteChannel;
  * Extended interface for a resource that supports writing to it.
  * Provides an {@link #getOutputStream() OutputStream accessor}.
  *
+ *
+ * Resource接口定义了资源的可访问等一系列的操作，但有些资源需要可写入的，如文件对象，
+ * 因此还定义了WritableResource接口，继承了Resource接口，表示资源具有可写入的能力
+ *
+ * Spring资源的扩展接口，该接口支持Spring资源的可写入
+ *
  * @author Juergen Hoeller
  * @since 3.1
  * @see java.io.OutputStream
@@ -32,6 +38,9 @@ import java.nio.channels.WritableByteChannel;
 public interface WritableResource extends Resource {
 
 	/**
+	 *
+	 * 判断资源是否可写入
+	 *
 	 * Indicate whether the contents of this resource can be written
 	 * via {@link #getOutputStream()}.
 	 * <p>Will be {@code true} for typical resource descriptors;
@@ -46,6 +55,9 @@ public interface WritableResource extends Resource {
 	}
 
 	/**
+	 *
+	 *获取资源写入的二进制流
+	 *
 	 * Return an {@link OutputStream} for the underlying resource,
 	 * allowing to (over-)write its content.
 	 * @throws IOException if the stream could not be opened
@@ -54,6 +66,9 @@ public interface WritableResource extends Resource {
 	OutputStream getOutputStream() throws IOException;
 
 	/**
+	 *
+	 * 获取资源可写入的字节管道对象
+	 *
 	 * Return a {@link WritableByteChannel}.
 	 * <p>It is expected that each call creates a <i>fresh</i> channel.
 	 * <p>The default implementation returns {@link Channels#newChannel(OutputStream)}

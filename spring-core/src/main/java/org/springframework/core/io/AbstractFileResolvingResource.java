@@ -31,6 +31,16 @@ import java.nio.file.StandardOpenOption;
 import org.springframework.util.ResourceUtils;
 
 /**
+ * 代表需要解析的路径资源，如类资源Class,URL资源等等  是个抽象类
+ *
+ * 带有路径解析的资源类似这样：
+ *
+ * http://....; ftp://.......; file://......; classpath://....; jar://........;war://.......
+ *
+ * 等等，因此需要一个抽象类，把这些需要解析的在形式化上统一。
+ *
+ * 该类，使用Java的 统一资源定位符，URL对象，来表示类似这些需要解析的对象。
+ *
  * Abstract base class for resources which resolve URLs into File references,
  * such as {@link UrlResource} or {@link ClassPathResource}.
  *

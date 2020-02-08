@@ -35,6 +35,12 @@ import java.nio.file.StandardOpenOption;
 import org.springframework.util.Assert;
 
 /**
+ *
+ *  代表文件系统资源，以Path对象访问
+ *
+ *  代表文件系统资源，以Path对象访问，和FileSystemResource类似，也是表示文件资源，只不过该类是通过Path对象访问，
+ *  可以理解为对java.nio.file.Path 对象的封装，本质上还是File对象处理的
+ *
  * {@link Resource} implementation for {@link java.nio.file.Path} handles,
  * performing all operations and transformations via the {@code Path} API.
  * Supports resolution as a {@link File} and also as a {@link URL}.

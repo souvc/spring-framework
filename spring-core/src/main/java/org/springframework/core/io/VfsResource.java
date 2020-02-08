@@ -26,6 +26,16 @@ import org.springframework.core.NestedIOException;
 import org.springframework.util.Assert;
 
 /**
+ *
+ * 代表JBoss的虚拟文件系统VFS
+ *
+ * 资源以虚拟文件VFS的形式存在，可以使用该实现类。VFS是一个虚拟文件系统，
+ * Linux的系统中所有文件的顶层都设计为虚拟的VFS，它能一致的访问物理文件系统、jar资源、zip资源、war资源等，
+ * VFS能把这些资源一致的映射到一个目录上，访问它们就像访问物理文件资源一样，而其实这些资源不存在于物理文件系统。
+ *
+ * 该实现类，封装了一个Object对象，所有的操作都是通过这个包装的对象的反射来实现的。
+ * 当然，内部具体实现细节，可以通过工具类 VfsUtils 调用。
+ *
  * JBoss VFS based {@link Resource} implementation.
  *
  * <p>As of Spring 4.0, this class supports VFS 3.x on JBoss AS 6+

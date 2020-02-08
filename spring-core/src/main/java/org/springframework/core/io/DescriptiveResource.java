@@ -23,6 +23,9 @@ import java.io.InputStream;
 import org.springframework.lang.Nullable;
 
 /**
+ *
+ * 代表资源描述的资源，可以理解为资源的元数据(元资源) 不指向任何的实际资源对象
+ *
  * Simple {@link Resource} implementation that holds a resource description
  * but does not point to an actually readable resource.
  *

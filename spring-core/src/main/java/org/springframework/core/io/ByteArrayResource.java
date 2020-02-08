@@ -25,6 +25,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
+ *
+ *  代表字节数组资源
+ *
+ *  该类是字节数组资源的实现，也就是说，该类资源是以字节数组表示的。
+ *  内部实现也比较简单，使用不可变的字节数组存储 和一个不可变的描述对象
+ *
  * {@link Resource} implementation for a given byte array.
  * <p>Creates a {@link ByteArrayInputStream} for the given byte array.
  *

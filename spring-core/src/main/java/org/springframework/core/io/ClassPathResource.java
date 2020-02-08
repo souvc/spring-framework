@@ -28,6 +28,10 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 /**
+ * ClassPathResource这个资源类表示的是类路径下的资源，资源以相对于类路径的方式表示。
+ *
+ * 这个资源类可以相对于应用程序下的某个类或者相对于整个应用程序，但只能是其中之一，取决于构造方法有没有传入Class参数
+ *
  * {@link Resource} implementation for class path resources. Uses either a
  * given {@link ClassLoader} or a given {@link Class} for loading resources.
  *
@@ -43,16 +47,22 @@ import org.springframework.util.StringUtils;
  */
 public class ClassPathResource extends AbstractFileResolvingResource {
 
+	//不可变的相对路径
 	private final String path;
 
+	//一个类加载器
 	@Nullable
 	private ClassLoader classLoader;
 
+	//一个类对象
 	@Nullable
 	private Class<?> clazz;
 
 
 	/**
+	 *
+	 * 初始化，以类的路径作为参数
+	 *
 	 * Create a new {@code ClassPathResource} for {@code ClassLoader} usage.
 	 * A leading slash will be removed, as the ClassLoader resource access
 	 * methods will not accept it.
@@ -67,6 +77,9 @@ public class ClassPathResource extends AbstractFileResolvingResource {
 	}
 
 	/**
+	 *
+	 * 初始化，以类的路径和类加载器作为参数
+	 *
 	 * Create a new {@code ClassPathResource} for {@code ClassLoader} usage.
 	 * A leading slash will be removed, as the ClassLoader resource access
 	 * methods will not accept it.
@@ -94,6 +107,9 @@ public class ClassPathResource extends AbstractFileResolvingResource {
 	}
 
 	/**
+	 *
+	 * 初始化，以类的路径和类的字节码作为参数
+	 *
 	 * Create a new {@code ClassPathResource} for {@code Class} usage.
 	 * The path can be relative to the given class, or absolute within
 	 * the classpath via a leading slash.
@@ -108,6 +124,9 @@ public class ClassPathResource extends AbstractFileResolvingResource {
 	}
 
 	/**
+	 *
+	 *  初始化，以类的路径、类加载器和类的字节码作为参数
+	 *
 	 * Create a new {@code ClassPathResource} with optional {@code ClassLoader}
 	 * and {@code Class}. Only for internal usage.
 	 * @param path relative or absolute path within the classpath
@@ -168,6 +187,9 @@ public class ClassPathResource extends AbstractFileResolvingResource {
 	}
 
 	/**
+	 *
+	 * 获取类路径下的资源的二进制流
+	 *
 	 * This implementation opens an InputStream for the given class path resource.
 	 * @see java.lang.ClassLoader#getResourceAsStream(String)
 	 * @see java.lang.Class#getResourceAsStream(String)

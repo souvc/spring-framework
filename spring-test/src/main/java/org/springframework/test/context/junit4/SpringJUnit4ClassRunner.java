@@ -84,6 +84,8 @@ import org.springframework.util.ReflectionUtils;
  *
  * <p><strong>NOTE:</strong> As of Spring Framework 4.3, this class requires JUnit 4.12 or higher.
  *
+ * 这个类是一个针对 Junit 运行环境的自定义扩展，用来标准化在 Spring 环境中 Junit4.5 的测试用例，例如支持的注释标签的标准化
+ *
  * @author Sam Brannen
  * @author Juergen Hoeller
  * @since 2.5

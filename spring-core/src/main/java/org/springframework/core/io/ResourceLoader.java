@@ -20,6 +20,16 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.ResourceUtils;
 
 /**
+ *
+ * 为甚么存在该类？
+ *
+ * Resource资源是有了，但是如何去查找和定位这些资源，则应该是ResourceLoader的职责了，
+ * ResourceLoader 接口是资源查找定位策略的统一抽象，具体的资源查找定位策略则由相应的ResourceLoader实现类给出。
+ *
+ * 定义资源加载器，主要应用于根据给定的资源文件地址返回对应的Resource，提供了Resource对象获取，自定义资源文件协议解析等功能
+ *
+ * Spring 提供了 Resource 和 ResourceLoader 来统一抽象整个资源及其定位。 将资源的定义和资源的加载区分开了，职责更加单一和清晰。
+ *
  * Strategy interface for loading resources (e.. class path or file system
  * resources). An {@link org.springframework.context.ApplicationContext}
  * is required to provide this functionality, plus extended
@@ -32,8 +42,6 @@ import org.springframework.util.ResourceUtils;
  * from Strings when running in an ApplicationContext, using the particular
  * context's resource loading strategy.
  *
- * 定义资源加载器，主要应用于根据给定的资源文件地址返回对应的Resource
- * 提供了Resource对象获取，自定义资源文件协议解析等功能
  *
  * @author Juergen Hoeller
  * @since 10.03.2004
@@ -49,6 +57,9 @@ public interface ResourceLoader {
 
 
 	/**
+	 *
+	 * 根据所提供资源的路径 location 返回 Resource 实例，但是它不确保该 Resource 一定存在，需要调用
+	 *
 	 * Return a Resource handle for the specified resource location.
 	 * <p>The handle should always be a reusable resource descriptor,
 	 * allowing for multiple {@link Resource#getInputStream()} calls.

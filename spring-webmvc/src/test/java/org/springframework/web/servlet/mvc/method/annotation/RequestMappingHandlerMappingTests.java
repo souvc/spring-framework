@@ -171,26 +171,46 @@ public class RequestMappingHandlerMappingTests {
 				requestMappingInfo.getConsumesCondition().getConsumableMediaTypes()).toArray());
 	}
 
+	/**
+	 * 测试get请求
+	 * @throws Exception
+	 */
 	@Test
 	public void getMapping() throws Exception {
 		assertComposedAnnotationMapping(RequestMethod.GET);
 	}
 
+	/**
+	 * 测试post请求
+	 * @throws Exception
+	 */
 	@Test
 	public void postMapping() throws Exception {
 		assertComposedAnnotationMapping(RequestMethod.POST);
 	}
 
+	/**
+	 * 测试put请求
+	 * @throws Exception
+	 */
 	@Test
 	public void putMapping() throws Exception {
 		assertComposedAnnotationMapping(RequestMethod.PUT);
 	}
 
+	/**
+	 * 测试delete请求
+	 * @throws Exception
+	 */
 	@Test
 	public void deleteMapping() throws Exception {
 		assertComposedAnnotationMapping(RequestMethod.DELETE);
 	}
 
+	/**
+	 * 测试patch注解
+	 * @throws Exception
+	 */
 	@Test
 	public void patchMapping() throws Exception {
 		assertComposedAnnotationMapping(RequestMethod.PATCH);
@@ -224,6 +244,9 @@ public class RequestMappingHandlerMappingTests {
 	}
 
 
+	/**
+	 * 构建一个组合注解测试控制器
+	 */
 	@Controller
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	static class ComposedAnnotationController {
@@ -259,6 +282,9 @@ public class RequestMappingHandlerMappingTests {
 	}
 
 
+	/**
+	 * 自定义注解
+	 */
 	@RequestMapping(method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -271,6 +297,9 @@ public class RequestMappingHandlerMappingTests {
 	}
 
 
+	/**
+	 * 构建一个RestController 测试控制类
+	 */
 	@RestController
 	@RequestMapping("/user")
 	static class UserController {

@@ -17,6 +17,10 @@
 package org.springframework.core.io;
 
 /**
+ *
+ * ContextResource 接口也继承了Resource接口，
+ * 表示可以从关闭的上下文Context中获取资源的路径，这样应用程序上下文也就有了返回上下文路径的能力。
+ *
  * Extended interface for a resource that is loaded from an enclosing
  * 'context', e.g. from a {@link javax.servlet.ServletContext} but also
  * from plain classpath paths or relative file system paths (specified
@@ -30,6 +34,9 @@ package org.springframework.core.io;
 public interface ContextResource extends Resource {
 
 	/**
+	 *
+	 * 从关闭的上下文Context中获取资源的路径
+	 *
 	 * Return the path within the enclosing 'context'.
 	 * <p>This is typically path relative to a context-specific root directory,
 	 * e.g. a ServletContext root or a PortletContext root.

@@ -20,6 +20,10 @@ import org.springframework.beans.factory.Aware;
 import org.springframework.core.io.ResourceLoader;
 
 /**
+ *
+ * ResourceLoaderAware回调接口负责将ResourceLoader对象注入到当前的受管Bean实例中，其定义如下。
+ * 当受管Bean获得ResourceLoader对象后，它便能够通过它获得各种资源。
+ *
  * Interface to be implemented by any object that wishes to be notified of the
  * {@link ResourceLoader} (typically the ApplicationContext) that it runs in.
  * This is an alternative to a full {@link ApplicationContext} dependency via

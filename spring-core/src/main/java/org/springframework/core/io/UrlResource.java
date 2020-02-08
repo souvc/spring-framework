@@ -32,6 +32,11 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 
 /**
+ *
+ * UrlResource这个资源类封装了可以以URL表示的各种资源。
+ * 它有3个属性，URI、URL，以及规范化后的URL，用于资源间的比较以及计算HashCode。
+ * 他是对java.net.URL的封装。
+ *
  * {@link Resource} implementation for {@code java.net.URL} locators.
  * Supports resolution as a {@code URL} and also as a {@code File} in
  * case of the {@code "file:"} protocol.
@@ -43,23 +48,32 @@ import org.springframework.util.StringUtils;
 public class UrlResource extends AbstractFileResolvingResource {
 
 	/**
+	 * 原始的URI，如果可用，使用URI和文件访问
+	 *
 	 * Original URI, if available; used for URI and File access.
 	 */
 	@Nullable
 	private final URI uri;
 
 	/**
+	 * 原始的URL，用于实际访问
+	 *
 	 * Original URL, used for actual access.
 	 */
 	private final URL url;
 
 	/**
+	 * 标准化的URL，用于比较
+	 *
 	 * Cleaned URL (with normalized path), used for comparisons.
 	 */
 	private final URL cleanedUrl;
 
 
 	/**
+	 *
+	 * 初始化，给定URI路径
+	 *
 	 * Create a new {@code UrlResource} based on the given URI object.
 	 * @param uri a URI
 	 * @throws MalformedURLException if the given URL path is not valid
@@ -73,6 +87,8 @@ public class UrlResource extends AbstractFileResolvingResource {
 	}
 
 	/**
+	 *  初始化，给定URL路径
+	 *
 	 * Create a new {@code UrlResource} based on the given URL object.
 	 * @param url a URL
 	 */
@@ -84,6 +100,9 @@ public class UrlResource extends AbstractFileResolvingResource {
 	}
 
 	/**
+	 *
+	 * 初始化，给定物理路径，然后转换到URL路径，当给定的物理路径需要可用
+	 *
 	 * Create a new {@code UrlResource} based on a URL path.
 	 * <p>Note: The given path needs to be pre-encoded if necessary.
 	 * @param path a URL path
@@ -98,6 +117,9 @@ public class UrlResource extends AbstractFileResolvingResource {
 	}
 
 	/**
+	 *
+	 * 初始化，给定路径样式描述符和路径字符串
+	 *
 	 * Create a new {@code UrlResource} based on a URI specification.
 	 * <p>The given parts will automatically get encoded if necessary.
 	 * @param protocol the URL protocol to use (e.g. "jar" or "file" - without colon);
@@ -112,6 +134,8 @@ public class UrlResource extends AbstractFileResolvingResource {
 	}
 
 	/**
+	 * 初始化，给定路径样式描述符、路径和格式化符号
+	 *
 	 * Create a new {@code UrlResource} based on a URI specification.
 	 * <p>The given parts will automatically get encoded if necessary.
 	 * @param protocol the URL protocol to use (e.g. "jar" or "file" - without colon);
@@ -158,6 +182,9 @@ public class UrlResource extends AbstractFileResolvingResource {
 	}
 
 	/**
+	 *
+	 * 获取URL的二进制输入流
+	 *
 	 * This implementation opens an InputStream for the given URL.
 	 * <p>It sets the {@code useCaches} flag to {@code false},
 	 * mainly to avoid jar file locking on Windows.
@@ -167,12 +194,20 @@ public class UrlResource extends AbstractFileResolvingResource {
 	 */
 	@Override
 	public InputStream getInputStream() throws IOException {
+
+		//使用URL打开URL连接
 		URLConnection con = this.url.openConnection();
+
+		//设置是否需要使用缓存
 		ResourceUtils.useCachesIfNecessary(con);
 		try {
+
+			//获取二进制流
 			return con.getInputStream();
 		}
 		catch (IOException ex) {
+
+			// 如果打开了资源，需要关闭Http连接
 			// Close the HTTP connection (if applicable).
 			if (con instanceof HttpURLConnection) {
 				((HttpURLConnection) con).disconnect();

@@ -37,6 +37,14 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 /**
+ *
+ *  代表文件系统资源，以操作系统文件路径的方式访问
+ *
+ *  代表文件系统资源，以操作系统文件路径的方式访问，继承了 AbstractResource抽象类，并实现了 资源可写入接口 WritableResource
+ *
+ *  内部实现中，以 文件对象File和文件路径字符串 path  组成。也就是通过文件路径，转换为文件对象File，是java.io.File 的一个封装。
+ *  实现了 资源的根接口，获取了文件的 输入流
+ *
  * {@link Resource} implementation for {@code java.io.File} and
  * {@code java.nio.file.Path} handles with a file system target.
  * Supports resolution as a {@code File} and also as a {@code URL}.
@@ -167,6 +175,9 @@ public class FileSystemResource extends AbstractResource implements WritableReso
 	}
 
 	/**
+	 *
+	 * 实现 InputStreamSource 接口
+	 *
 	 * This implementation opens a NIO file stream for the underlying file.
 	 * @see java.io.FileInputStream
 	 */
@@ -181,6 +192,7 @@ public class FileSystemResource extends AbstractResource implements WritableReso
 	}
 
 	/**
+	 *
 	 * This implementation checks whether the underlying file is marked as writable
 	 * (and corresponds to an actual file with content, not to a directory).
 	 * @see java.io.File#canWrite()
@@ -193,6 +205,9 @@ public class FileSystemResource extends AbstractResource implements WritableReso
 	}
 
 	/**
+	 *
+	 * 实现资源的可写入，资源输出流
+	 *
 	 * This implementation opens a FileOutputStream for the underlying file.
 	 * @see java.io.FileOutputStream
 	 */

@@ -29,16 +29,20 @@ import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
 /**
+ *
+ * EncodedResource类是辅助类，从名字上可以看出，它是一个编码类。资源加载的时候，是采用操作系统默认的编码方式，为解决编码不统一的问题，
+ * Spring的IOC获取资源后，需要把资源重新编码一下。
+ *
+ * 例如，在Spring应用程序上下文的 XmlBeanDefinitionReader 类中，获取了 资源后，需要对资源进一步解析，在解析之前，调用 new EncodedResource()解析资源重新编码
+ *
+ * EncodeResource主要用于对资源文件的编码进行处理。
+ * 其主要逻辑体现在getReader()方法中，当设置了编码属性的时候Spring会使用相应的编码作为输入流的编码
+ *
  * Holder that combines a {@link Resource} descriptor with a specific encoding
  * or {@code Charset} to be used for reading from the resource.
  *
  * <p>Used as an argument for operations that support reading content with
  * a specific encoding, typically via a {@code java.io.Reader}.
- *
- *
- * EncodeResource主要用于对资源文件的编码进行处理。
- * 其主要逻辑体现在getReader()方法中，当设置了编码属性的时候Spring会使用相应的编码作为输入流的编码
- *
  * @author Juergen Hoeller
  * @author Sam Brannen
  * @since 1.2.6
@@ -132,6 +136,9 @@ public class EncodedResource implements InputStreamSource {
 	}
 
 	/**
+	 *
+	 * 使用 编码规则 获取 {@code java.io.Reader}读取对象
+	 *
 	 * Open a {@code java.io.Reader} for the specified resource, using the specified
 	 * {@link #getCharset() Charset} or {@linkplain #getEncoding() encoding}
 	 * (if any).
@@ -152,6 +159,9 @@ public class EncodedResource implements InputStreamSource {
 	}
 
 	/**
+	 *
+	 * 获取编码后的二进制流对象
+	 *
 	 * Open an {@code InputStream} for the specified resource, ignoring any specified
 	 * {@link #getCharset() Charset} or {@linkplain #getEncoding() encoding}.
 	 * @throws IOException if opening the InputStream failed

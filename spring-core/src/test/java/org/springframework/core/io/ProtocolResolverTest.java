@@ -1,10 +1,15 @@
 package org.springframework.core.io;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * 使用自定义协议解析器加载
+ *
+ * 主要定义一些特定的协议，比如一个特定的文件上传
+ *
+ */
 public class ProtocolResolverTest {
 
 	@Test

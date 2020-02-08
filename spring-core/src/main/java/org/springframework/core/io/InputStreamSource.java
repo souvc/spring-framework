@@ -43,6 +43,14 @@ import java.io.InputStream;
 public interface InputStreamSource {
 
 	/**
+	 *
+	 * 获取资源的二进制流对象，所有的不同的资源类型都要去实现该接口
+	 *
+	 * Spring的资源接口是一个功能更强大的接口，用于定位和打开资源，返回一个InputStream以从资源中读取数据。
+	 * 预期每次调用都返回一个新的InputStream。调用者的职责是关闭流。
+	 *
+	 * 所有资源高度抽象为二进制流，也就是不管你资源文件是什么格式，也不管你资源在哪里，Spring底层访问的都是文件的二进制流，这样就可以统一访问了。
+	 *
 	 * Return an {@link InputStream} for the content of an underlying resource.
 	 * <p>It is expected that each call creates a <i>fresh</i> stream.
 	 * <p>This requirement is particularly important when you consider an API such
