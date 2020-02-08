@@ -23,6 +23,9 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 
 /**
+ *
+ * 拓展了MailSender接口，使其支持复杂邮件的发送
+ *
  * Extended {@link org.springframework.mail.MailSender} interface for JavaMail,
  * supporting MIME messages both as direct arguments and through preparation
  * callbacks. Typically used in conjunction with the {@link MimeMessageHelper}

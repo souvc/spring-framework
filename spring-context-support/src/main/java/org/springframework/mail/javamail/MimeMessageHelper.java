@@ -43,6 +43,9 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
+ *
+ * 带附件的邮件
+ *
  * Helper class for populating a {@link javax.mail.internet.MimeMessage}.
  *
  * <p>Mirrors the simple setters of {@link org.springframework.mail.SimpleMailMessage},

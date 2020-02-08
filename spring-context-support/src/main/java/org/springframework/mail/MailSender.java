@@ -17,6 +17,9 @@
 package org.springframework.mail;
 
 /**
+ *
+ * 发送简单邮件接口
+ *
  * This interface defines a strategy for sending simple mails. Can be
  * implemented for a variety of mailing systems due to the simple requirements.
  * For richer functionality like MIME messages, consider JavaMailSender.
