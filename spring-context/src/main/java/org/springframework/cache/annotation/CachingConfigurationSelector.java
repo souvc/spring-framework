@@ -26,6 +26,9 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 /**
+ *
+ * CachingConfigurationSelector将AutoProxyRegistrar和ProxyCachingConfiguration注入到IOC容器中。
+ *
  * Selects which implementation of {@link AbstractCachingConfiguration} should
  * be used based on the value of {@link EnableCaching#mode} on the importing
  * {@code @Configuration} class.

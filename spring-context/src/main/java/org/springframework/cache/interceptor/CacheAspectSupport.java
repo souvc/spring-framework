@@ -372,8 +372,12 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 	@Nullable
 	private Object execute(final CacheOperationInvoker invoker, Method method, CacheOperationContexts contexts) {
 		// Special handling of synchronized invocation
+
+		//2.1同步的处理
 		if (contexts.isSynchronized()) {
 			CacheOperationContext context = contexts.get(CacheableOperation.class).iterator().next();
+
+			//2.1.1 condition为true，走缓存
 			if (isConditionPassing(context, CacheOperationExpressionEvaluator.NO_RESULT)) {
 				Object key = generateKey(context, CacheOperationExpressionEvaluator.NO_RESULT);
 				Cache cache = context.getCaches().iterator().next();
@@ -386,20 +390,25 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 					throw (CacheOperationInvoker.ThrowableWrapper) ex.getCause();
 				}
 			}
+
+			//2.1.2 condition不为true，不走缓存，直接执行方法
 			else {
 				// No caching required, only call the underlying method
 				return invokeOperation(invoker);
 			}
 		}
 
-
+		//2.2 非同步的处理
+		//2.2.1 处理前置的CacheEvict
 		// Process any early evictions
 		processCacheEvicts(contexts.get(CacheEvictOperation.class), true,
 				CacheOperationExpressionEvaluator.NO_RESULT);
 
+		//2.2.2 处理Cacheable，获取缓存中对应的值
 		// Check if we have a cached item matching the conditions
 		Cache.ValueWrapper cacheHit = findCachedItem(contexts.get(CacheableOperation.class));
 
+		//2.2.3 从CacheableOperation中收集需要加缓存操作的请求
 		// Collect puts from any @Cacheable miss, if no cached item is found
 		List<CachePutRequest> cachePutRequests = new LinkedList<>();
 		if (cacheHit == null) {
@@ -410,6 +419,7 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 		Object cacheValue;
 		Object returnValue;
 
+		//2.2.4 获取缓存值cacheValue和方法返回值returnValue
 		if (cacheHit != null && !hasCachePut(contexts)) {
 			// If there are no put requests, just use the cache hit
 			cacheValue = cacheHit.get();
@@ -421,14 +431,17 @@ public abstract class CacheAspectSupport extends AbstractCacheInvoker
 			cacheValue = unwrapReturnValue(returnValue);
 		}
 
+		//2.2.5 从CachePutOperation中收集需要加缓存操作的请求
 		// Collect any explicit @CachePuts
 		collectPutRequests(contexts.get(CachePutOperation.class), cacheValue, cachePutRequests);
 
+		//2.2.6对于所有的加缓存请求，执行加缓存操作。
 		// Process any collected put requests, either from @CachePut or a @Cacheable miss
 		for (CachePutRequest cachePutRequest : cachePutRequests) {
 			cachePutRequest.apply(cacheValue);
 		}
 
+		//2.2.7处理前置的CacheEvict
 		// Process any late evictions
 		processCacheEvicts(contexts.get(CacheEvictOperation.class), false, cacheValue);
 

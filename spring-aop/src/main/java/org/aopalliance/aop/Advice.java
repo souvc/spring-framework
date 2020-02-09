@@ -17,6 +17,11 @@
 package org.aopalliance.aop;
 
 /**
+ *
+ * 通知(Advice)
+ *
+ * 这是在方法执行之前或之后采取的实际操作。 这是在Spring AOP框架的程序执行期间调用的实际代码片段。
+ *
  * Tag interface for Advice. Implementations can be any type
  * of advice, such as Interceptors.
  *

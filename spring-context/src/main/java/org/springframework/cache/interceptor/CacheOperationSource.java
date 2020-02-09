@@ -22,6 +22,9 @@ import java.util.Collection;
 import org.springframework.lang.Nullable;
 
 /**
+ *
+ * 获得指定方法上的所有缓存操作
+ *
  * Interface used by {@link CacheInterceptor}. Implementations know how to source
  * cache operation attributes, whether from configuration, metadata attributes at
  * source level, or elsewhere.

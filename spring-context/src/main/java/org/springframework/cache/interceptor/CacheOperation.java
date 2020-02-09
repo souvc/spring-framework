@@ -23,6 +23,9 @@ import java.util.Set;
 import org.springframework.util.Assert;
 
 /**
+ *
+ * 缓存操作的抽象，其实现类有CacheEvictOperation、CachePutOperation和CacheableOperation
+ *
  * Base class for cache operations.
  *
  * @author Costin Leau

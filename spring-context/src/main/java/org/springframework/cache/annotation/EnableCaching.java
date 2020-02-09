@@ -27,6 +27,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.Ordered;
 
 /**
+ *
+ * 在配置类中使用@EnableCaching开启Spring的缓存功能。
+ *
  * Enables Spring's annotation-driven cache management capability, similar to the
  * support found in Spring's {@code <cache:*>} XML namespace. To be used together
  * with @{@link org.springframework.context.annotation.Configuration Configuration}
@@ -169,10 +172,13 @@ import org.springframework.core.Ordered;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(CachingConfigurationSelector.class)
+@Import(CachingConfigurationSelector.class)//@EnableCaching通过@Import注解引入CachingConfigurationSelector类
 public @interface EnableCaching {
 
 	/**
+	 *
+	 * proxyTargetClass：属性值为false时，表示使用jdk代理，为true时则表示使用cglib代理
+	 *
 	 * Indicate whether subclass-based (CGLIB) proxies are to be created as opposed
 	 * to standard Java interface-based proxies. The default is {@code false}. <strong>
 	 * Applicable only if {@link #mode()} is set to {@link AdviceMode#PROXY}</strong>.
@@ -186,6 +192,11 @@ public @interface EnableCaching {
 	boolean proxyTargetClass() default false;
 
 	/**
+	 *
+	 * mode：指定AOP的模式
+	 * 当值为AdviceMode.PROXY时,表示使用Spring aop，默认值
+	 * 当值为AdviceMode.ASPECTJ时，表示使用AspectJ。
+	 *
 	 * Indicate how caching advice should be applied.
 	 * <p><b>The default is {@link AdviceMode#PROXY}.</b>
 	 * Please note that proxy mode allows for interception of calls through the proxy

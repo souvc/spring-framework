@@ -17,6 +17,10 @@
 package org.springframework.aop;
 
 /**
+ *
+ * 这是一组一个或多个连接点，其中应该执行通知(Advice)。
+ * 可以使用表达式或模式指定切入点
+ *
  * Core Spring pointcut abstraction.
  *
  * <p>A pointcut is composed of a {@link ClassFilter} and a {@link MethodMatcher}.

@@ -17,6 +17,11 @@
 package org.springframework.aop;
 
 /**
+ *
+ * 介绍(Introduction)
+ *
+ * 介绍允许向现有类添加新的方法或属性。
+ *
  * Interface supplying the information necessary to describe an introduction.
  *
  * <p>{@link IntroductionAdvisor IntroductionAdvisors} must implement this

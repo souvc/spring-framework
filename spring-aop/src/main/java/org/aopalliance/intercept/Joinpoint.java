@@ -19,6 +19,11 @@ package org.aopalliance.intercept;
 import java.lang.reflect.AccessibleObject;
 
 /**
+ *
+ * 加入点(Join point)
+ *
+ * 表示您的应用程序中可以插入AOP方面的一点。也可以说，这是应用程序中使用Spring AOP框架采取操作的实际位置。
+ *
  * This interface represents a generic runtime joinpoint (in the AOP
  * terminology).
  *
